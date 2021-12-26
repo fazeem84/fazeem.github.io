@@ -1,22 +1,31 @@
-name: Jbake-WorkFlow
-on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-  push:
-    branches:
-      - main
+---
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11 version
+      -
+        uses: actions/checkout@v2
+      -
+        name: "Set up JDK 11 version"
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Validate Gradle wrapper
+          distribution: adopt
+          java-version: "11"
+      -
+        name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-      - name: Build with Gradle
-        run: ./gradlew bake
+      -
+        name: "Build with Gradle"
+        run: "./gradlew bake"
+      -
+        name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.5.2
+        with:
+          BRANCH: gh-pages
+          FOLDER: build
+          GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
+name: "Webpage Build"
+true:
+  push:
+    branches:
+      - master
