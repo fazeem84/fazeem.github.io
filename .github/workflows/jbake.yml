@@ -27,8 +27,8 @@ jobs:
         run: "./gradlew bake"
       -
         name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.5.2
+        uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           BRANCH: gh-pages
           FOLDER: build
-          GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
+#          GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
