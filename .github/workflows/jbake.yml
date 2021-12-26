@@ -1,4 +1,10 @@
----
+name: Jbake-WorkFlow
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +30,3 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
           GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
-name: "Webpage Build"
-true:
-  push:
-    branches:
-      - master
