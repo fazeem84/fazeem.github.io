@@ -6,160 +6,285 @@
         <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
         <description>JBake Bootstrap Template</description>
         <language>en-gb</language>
-        <pubDate>Sun Dec 26 10:07:40 UTC 2021</pubDate>
-        <lastBuildDate>Sun Dec 26 10:07:40 UTC 2021</lastBuildDate>
+        <pubDate>Sat Jan 01 13:36:58 UTC 2022</pubDate>
+        <lastBuildDate>Sat Jan 01 13:36:58 UTC 2022</lastBuildDate>
 
                 <item>
-            <title>Quarkus Post</title>
-            <link>http://jbake.org/blog/2013/quarkus-post.html</link>
-            <pubDate>Thu Dec 23 00:00:00 UTC 2021</pubDate>
-            <guid isPermaLink="false">blog/2013/quarkus-post.html</guid>
+            <title>Building your personal blog with JBake and GitHub Pages</title>
+            <link>http://jbake.org/blog/2022/first-blog.html</link>
+            <pubDate>Mon Dec 27 00:00:00 UTC 2021</pubDate>
+            <guid isPermaLink="false">blog/2022/first-blog.html</guid>
             <description>
-                &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;What is Quarkus?
-Traditional Java stacks were engineered for monolithic applications with long startup times and large memory requirements in a world where the cloud, containers, and Kubernetes did not exist. Java frameworks needed to evolve to meet the needs of this new world.&lt;/p&gt;
-&lt;/div&gt;
+                &lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Quarkus was created to enable Java developers to create applications for a modern, cloud-native world. Quarkus is a Kubernetes-native Java framework tailored for GraalVM and HotSpot, crafted from best-of-breed Java libraries and standards. The goal is to make Java the leading platform in Kubernetes and serverless environments while offering developers a framework to address a wider range of distributed application architectures.&lt;/p&gt;
-&lt;/div&gt;            </description>
-        </item>
-                <item>
-            <title>Oliver&#8217;s Post</title>
-            <link>http://jbake.org/blog/2013/fifth-post.html</link>
-            <pubDate>Tue Nov 12 00:00:00 UTC 2013</pubDate>
-            <guid isPermaLink="false">blog/2013/fifth-post.html</guid>
-            <description>
-                &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Oliver&amp;#8217;s first post and the fifth post at all.&lt;/p&gt;
+&lt;p&gt;This post explains steps to generate and deploy  personal blog site&lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;techstack&quot;&gt;TechStack&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;jbake&quot;&gt;JBake&lt;/h3&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu,
-mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo
-ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet
-ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus,
-id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In
-consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere
-libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-&lt;/div&gt;            </description>
-        </item>
-                <item>
-            <title>Fourth Post</title>
-            <link>http://jbake.org/blog/2013/fourth-post.html</link>
-            <pubDate>Thu Oct 17 00:00:00 UTC 2013</pubDate>
-            <guid isPermaLink="false">blog/2013/fourth-post.html</guid>
-            <description>
-                &lt;div class=&quot;imageblock&quot;&gt;
+&lt;p&gt;JBake is a Java based, open source, static site/blog generator founded by Jonathan Bullock for developers &amp;amp; designers (&lt;a href=&quot;https://jbake.org/&quot; class=&quot;bare&quot;&gt;https://jbake.org/&lt;/a&gt;) .The main highlights of JBake are&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Open Source - Source available on GitHub, licensed under MIT License&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cross platform support - The binary distribution runs on Windows, Unix/Linux and Mac OS X.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content Formats - Supports AsciiDoc, Markdown and good old HTML formatted content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open Structure - Structure your content any way you see fit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Blog Aware - RSS/Atom feed, archive and tag support.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Draft support - View your draft content before publishing it and making it available to the world.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Self contained - Binary distribution contains everything you need apart from a JRE, no complicated environment setup with 3rd party dependencies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build tools - Plugins available for Gradle, Maven, mill, SBuild and sbt.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Template Support - Freemarker, Groovy, Thymeleaf, Jade and Pebble based templates &amp;amp; scripting support.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CSS Framework Support - Easily integrate CSS frameworks such as Bootstrap and Foundation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Custom Metadata - Add as much metadata to content as you like, also exposed to templates.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Storage Support - Store your site content in Dropbox, CVS, SVN, Git or whatever you want.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;gradle&quot;&gt;Gradle&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this post I used  Gradle  to build the static content and deploy the website using Github actions&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;github_pages&quot;&gt;GitHub Pages&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;GitHub pages (&lt;a href=&quot;https://pages.github.com/&quot; class=&quot;bare&quot;&gt;https://pages.github.com/&lt;/a&gt;) is a hosting service provided GitHub which help GitHub users to their website directly from github repo .&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;github_action&quot;&gt;GitHub Action&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;GitHub action is a CI/CD service provided by GitHub&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;steps_for_setting_up_your_blog&quot;&gt;Steps for Setting up your Blog&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Setup the GitHub Repository&lt;/p&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;login to github and create new public repository&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/git_create_project.JPG&quot; alt=&quot;Create Public Repository&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;clone the repo into your local  either by using IDE&amp;#8217;s or command line&lt;/p&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code data-lang=&quot;ruby&quot;&gt;git clone https://github.com/fazeem84/TestJBake.git&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Setup JBake using gradle&lt;/p&gt;
 &lt;div class=&quot;ulist&quot;&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu,
-mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo
-ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet
-ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus,
-id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In
-consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere
-libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-&lt;/div&gt;            </description>
-        </item>
-                <item>
-            <title>Third Post</title>
-            <link>http://jbake.org/blog/2013/third-post.html</link>
-            <pubDate>Thu Sep 26 00:00:00 UTC 2013</pubDate>
-            <guid isPermaLink="false">blog/2013/third-post.html</guid>
-            <description>
-                &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu,
-mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo
-ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet
-ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus,
-id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In
-consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere
-libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-&lt;/div&gt;            </description>
-        </item>
-                <item>
-            <title>Second Post</title>
-            <link>http://jbake.org/blog/2013/second-post.html</link>
-            <pubDate>Sun Aug 25 00:00:00 UTC 2013</pubDate>
-            <guid isPermaLink="false">blog/2013/second-post.html</guid>
-            <description>
-                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu,&lt;br /&gt;
-mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo&lt;br /&gt;
-ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet&lt;br /&gt;
-ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus,&lt;br /&gt;
-id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In&lt;br /&gt;
-consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere&lt;br /&gt;
-libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-            </description>
-        </item>
-                <item>
-            <title>First Post</title>
-            <link>http://jbake.org/blog/2013/first-post.html</link>
-            <pubDate>Wed Jul 24 00:00:00 UTC 2013</pubDate>
-            <guid isPermaLink="false">blog/2013/first-post.html</guid>
-            <description>
-                
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, 
-mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo 
-ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet 
-ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, 
-id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales.&lt;/p&gt; 
-
-&lt;pre class=&quot;prettyprint&quot;&gt;
-&lt;code&gt;
-package org.jbake;
-
-public class Oven {
-	public static void main(String[] args) {
-		System.out.print(&quot;Baking!&quot;);
-  }
+&lt;p&gt;add build.gradle and include JBake gradle plugin as shown below&lt;/p&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath  &#39;commons-configuration:commons-configuration:1.10&#39;
+    }
 }
-&lt;/code&gt;
-&lt;/pre&gt;
 
-&lt;p&gt;In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere 
-libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-            </description>
+plugins {
+    id &#39;org.jbake.site&#39; version &#39;5.5.0&#39;
+}
+bakeInit {
+    template = &#39;freemarker&#39;
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;this plugin has capability of downloading the template to your source folder from a url or a pre-defined teamplate available in JBake GitHub Repo for more information please check &lt;a href=&quot;https://github.com/jbake-org/jbake-gradle-plugin/blob/master/README.adoc&quot; class=&quot;bare&quot;&gt;https://github.com/jbake-org/jbake-gradle-plugin/blob/master/README.adoc&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Execute Gradle JBake Init command&lt;/p&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;gradle bakeInit&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This will generate the following folder structure with template source code&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/folder_structure.JPG&quot; alt=&quot;New Folder Structure&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;if you want know more details about the folders inside directory please refer &lt;a href=&quot;https://jbake.org/docs/2.6.7/#project_structure&quot; class=&quot;bare&quot;&gt;https://jbake.org/docs/2.6.7/#project_structure&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Execute bake step&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;bake step will transform  the source  contents  in different format like .md,adoc etc to pure html ,bake step can be triggered using following gradle command&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;gradle bake&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Once it&amp;#8217;s successfully executed the static content will be generated under build folder&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/build_folder.JPG&quot; alt=&quot;build Folder Structure&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Running web server from your local environment&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;run following gradle command to start the webserver, the server will be running on 8080 port by default&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;gradle bakePreview --no-daemon&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/blog-local.JPG&quot; alt=&quot;Local Blog&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Setup GitHub Action&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This section describes how to run gradle bake command once the code  pushed to the master branch and in this example we have set up a separate branch to host git hub page so last step of build execution is to copy the gnerated files into the specified branch&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure you have all permission to run the GitHub action &lt;a href=&quot;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository&quot; class=&quot;bare&quot;&gt;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;create a new branch(gh-pages) from where the git hub page will be served in future steps&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;create .git/workflow folder and create yaml/yml file build file and copy paste  the following code and check-in/push the repository into github(Make sure your committing tha gradle folder and gradle related file in the  root folder )&lt;/p&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;name: Jbake-WorkFlow
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        name: &quot;Set up JDK 11 &quot;
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: &quot;11&quot;
+      -
+        name: &quot;Validate Gradle wrapper&quot;
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      -
+        name: &quot;Build with Gradle&quot;
+        run: &quot;./gradlew bake&quot;
+      -
+        name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          BRANCH: gh-pages
+          FOLDER: build/jbake&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after pushing the code build will kick start in the action section and generated file will be copied to a new branch (gh-pages in this example,please check deploy stage in yaml file)&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/action.JPG&quot; alt=&quot;action Blog&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/gh-pages.JPG&quot; alt=&quot;GH Pages&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Source Code is available in &lt;a href=&quot;https://github.com/fazeem84/TestJBake&quot; class=&quot;bare&quot;&gt;https://github.com/fazeem84/TestJBake&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Setup GitHub Page&lt;/p&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to repository settings and select the branch from which the website is being server from (gh-page in our example) and save the settings&lt;/p&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;/img/first-blog/git-hub-page.JPG&quot; alt=&quot;Page Settings&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Page is successfully hosted on the url as in the GitHub Page settings&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;            </description>
         </item>
         
     </channel>
