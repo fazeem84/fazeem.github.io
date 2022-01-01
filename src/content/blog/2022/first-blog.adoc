@@ -1,6 +1,6 @@
 = Building your personal blog with JBake and GitHub Pages
 Fazeem Mohammed
-2021-12-27
+2022-01-01
 :jbake-type: post
 :jbake-status: published
 :jbake-tags: blog, asciidoc
