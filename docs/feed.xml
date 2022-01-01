@@ -6,13 +6,13 @@
         <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
         <description>JBake Bootstrap Template</description>
         <language>en-gb</language>
-        <pubDate>Sat Jan 01 13:36:58 UTC 2022</pubDate>
-        <lastBuildDate>Sat Jan 01 13:36:58 UTC 2022</lastBuildDate>
+        <pubDate>Sat Jan 01 14:39:23 UTC 2022</pubDate>
+        <lastBuildDate>Sat Jan 01 14:39:23 UTC 2022</lastBuildDate>
 
                 <item>
             <title>Building your personal blog with JBake and GitHub Pages</title>
             <link>http://jbake.org/blog/2022/first-blog.html</link>
-            <pubDate>Mon Dec 27 00:00:00 UTC 2021</pubDate>
+            <pubDate>Sat Jan 01 00:00:00 UTC 2022</pubDate>
             <guid isPermaLink="false">blog/2022/first-blog.html</guid>
             <description>
                 &lt;div id=&quot;preamble&quot;&gt;
