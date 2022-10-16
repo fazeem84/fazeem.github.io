@@ -1,0 +1,250 @@
+<html>
+<head>
+    <title>My Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!-- Le styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+
+
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body onload="prettyPrint()">
+
+<div id="wrap">
+    <!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../../"> Fazeem's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+<!--                <li><a href="../../feed.xml">Subscribe</a></li>-->
+<!--                <li><a href="../../sitemap.xml">SiteMap</a></li>-->
+<!--                <li class="dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a href="#">Action</a></li>-->
+<!--                        <li><a href="#">Another action</a></li>-->
+<!--                        <li><a href="#">Something else here</a></li>-->
+<!--                        <li class="divider"></li>-->
+<!--                        <li class="dropdown-header">Nav header</li>-->
+<!--                        <li><a href="#">Separated link</a></li>-->
+<!--                        <li><a href="#">One more separated link</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+                <li><a href="../../archive.html">Archive</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+    <div class="container">
+            <div class="page-header">
+        <h1>Enhanced Dynamo DB  and Integration Test Using Dynamo Local</h1>
+    </div>
+
+<p><em>Sun Oct 16 00:00:00 UTC 2022</em></p>
+
+<p><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>AWS Released  new Enhanced Dynamo Client <a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html">Enhanced Dynamo Client</a> which helps Java developers to easily Implement  DAO Implementation without writing the mapping logic and AWS provides <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">Downloadable DynamoDb</a> which  helps developers to do the Integration testing with Dynamo DB without connecting to the Cloud.</p>
+</div>
+<div class="paragraph">
+<p>This post explains how to Implement  a generic <strong>DynamoDBService</strong> Class using <a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html">Enhanced Dynamo Client</a> and Write Unit/Integration Test Cases  using <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">Downloadable DynamoDb</a></p>
+</div>
+<div class="paragraph">
+<p>The full source code can be found under following <a href="https://github.com/fazeem84/DynamoDbLocal">repo</a></p>
+</div>
+<div class="paragraph">
+<p>I have used following links and github repos to build this example</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.baeldung.com/dynamodb-local-integration-testsl">baeldung</a></p>
+</li>
+<li>
+<p><a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing">redskap GitRepository</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisite">Prerequisite</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Java &gt; 11</p>
+</li>
+<li>
+<p>Gradle &gt; 5</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_enhanced_client_in_gradle">Setting Enhanced Client in Gradle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To set up enhanced Client in Gradle following dependecies needs to be added</p>
+</div>
+<div id="EnhancedDynamo" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.434'
+    implementation 'software.amazon.awssdk:dynamodb:2.17.28'
+    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.17.28'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_up_dynamodb_local">Setting up DynamoDb Local</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Aws documentation provides steps to setting up <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">maven build</a> but Gradle setting up is not provided by AWS  and this library is not available central maven repo, so users needs to set up aws maven repo for setting DynamoDb Local</p>
+</div>
+<div id="MavenRepoSetup" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">repositories {
+    maven {
+        name
+         url "https://s3-us-west-2.amazonaws.com/dynamodb-local/release"
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>following dependency will add DynamoDbLocal to the gradle project</p>
+</div>
+<div id="DynamoLocalSetup" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">testImplementation group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.119'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>you can find more info about the set up in <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/README.md" class="bare">https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/README.md</a>
+ . As a part of test setup copy <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/src/test/java/io/redskap/java/aws/dynamodb/example/local/testing/AwsDynamoDbLocalTestUtils.java">AwsDynamoDbLocalTestUtils</a> and call <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/src/test/java/io/redskap/java/aws/dynamodb/example/local/testing/AwsDynamoDbLocalTestUtils.java#L30">AwsDynamoDbLocalTestUtils#initSqLite()</a> during setup function of JUnit Test class</p>
+</div>
+<div class="sect2">
+<h3 id="dynamodb_domain_pojo">DynamoDb Domain POJO</h3>
+<div class="paragraph">
+<p>This class is POJO representation of Dynamo DB schema, I have used  <a href="https://projectlombok.org/">lombok</a> to avoid boiler plating of Getter and Setter methods, @DynamoDbBean represents dynamo db structure and @DynamoDbPartitionKey represents primary key id</p>
+</div>
+<div id="DynamoDB" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="Java">@Data
+@DynamoDbBean
+public class Student {
+    private String studentId;
+    private String studentName;
+    private String department;
+    @DynamoDbPartitionKey
+    @DynamoDbAttribute("studentId")
+    public String getStudentId() {
+        return studentId;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dynamodb_service_implementation">DynamoDb Service Implementation</h3>
+<div class="paragraph">
+<p>This class has full DAO implementation</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>CreateTable</p>
+</li>
+<li>
+<p>Insert/Update Item based on partitions key</p>
+</li>
+<li>
+<p>Get Item by Id</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/fazeem84/DynamoDbLocal/blob/main/src/main/java/com/dynamo/local/service/DynamoDBService.java">DynamoDBService.java</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_up_junit_test_class">Setting Up JUnit Test class</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During the startup JUnit will spin up a local dynamo DB instance and following code shows how to establish DynamoClient connectivity to local instance</p>
+</div>
+<div id="DynamoDB" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="Java">private static final String TABLE_NAME = "Student";
+private static  DynamoDBProxyServer server;
+private static final String port = "8000";
+private static final String uri = "http://localhost:"+port;
+
+ @BeforeEach
+    public void setUpTest() throws Exception {
+        'AwsDynamoDbLocalTestUtils copied from the github repo as explained earlier'
+        AwsDynamoDbLocalTestUtils.initSqLite();
+        'This line will spin up local instance on 8080 port'
+        server = ServerRunner.createServerFromCommandLineArgs(
+                new String[]{"-inMemory", "-port", port});
+        server.start();
+        client=DynamoDbClient.builder()
+                .endpointOverride(URI.create(uri))
+                .region(Region.AF_SOUTH_1)'Any region should work '
+                .credentialsProvider(StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create("fakeMyKeyId","fakeSecretAccessKey")))
+                .build();
+
+    }</code></pre>
+</div>
+</div>
+</div>
+</div></p>
+
+<hr />
+    </div>
+</div>
+
+<div id="footer">
+    <div class="container">
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake ${version}</a></p>
+    </div>
+</div>
+
+<!-- Le javascript
+   ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery-1.11.1.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/prettify.js"></script>
+</body>
+</html>

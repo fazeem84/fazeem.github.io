@@ -65,6 +65,171 @@
     <div class="page-header">
         <h1>Blog</h1>
     </div>
+            <a href="blog/2022/dynamo-local.html"><h1>Enhanced Dynamo DB  and Integration Test Using Dynamo Local</h1></a>
+        <p>Sun Oct 16 00:00:00 UTC 2022</p>
+        <p><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>AWS Released  new Enhanced Dynamo Client <a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html">Enhanced Dynamo Client</a> which helps Java developers to easily Implement  DAO Implementation without writing the mapping logic and AWS provides <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">Downloadable DynamoDb</a> which  helps developers to do the Integration testing with Dynamo DB without connecting to the Cloud.</p>
+</div>
+<div class="paragraph">
+<p>This post explains how to Implement  a generic <strong>DynamoDBService</strong> Class using <a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html">Enhanced Dynamo Client</a> and Write Unit/Integration Test Cases  using <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">Downloadable DynamoDb</a></p>
+</div>
+<div class="paragraph">
+<p>The full source code can be found under following <a href="https://github.com/fazeem84/DynamoDbLocal">repo</a></p>
+</div>
+<div class="paragraph">
+<p>I have used following links and github repos to build this example</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.baeldung.com/dynamodb-local-integration-testsl">baeldung</a></p>
+</li>
+<li>
+<p><a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing">redskap GitRepository</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisite">Prerequisite</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Java &gt; 11</p>
+</li>
+<li>
+<p>Gradle &gt; 5</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_enhanced_client_in_gradle">Setting Enhanced Client in Gradle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To set up enhanced Client in Gradle following dependecies needs to be added</p>
+</div>
+<div id="EnhancedDynamo" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.434'
+    implementation 'software.amazon.awssdk:dynamodb:2.17.28'
+    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.17.28'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_up_dynamodb_local">Setting up DynamoDb Local</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Aws documentation provides steps to setting up <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">maven build</a> but Gradle setting up is not provided by AWS  and this library is not available central maven repo, so users needs to set up aws maven repo for setting DynamoDb Local</p>
+</div>
+<div id="MavenRepoSetup" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">repositories {
+    maven {
+        name
+         url "https://s3-us-west-2.amazonaws.com/dynamodb-local/release"
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>following dependency will add DynamoDbLocal to the gradle project</p>
+</div>
+<div id="DynamoLocalSetup" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="gradle">testImplementation group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.119'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>you can find more info about the set up in <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/README.md" class="bare">https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/README.md</a>
+ . As a part of test setup copy <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/src/test/java/io/redskap/java/aws/dynamodb/example/local/testing/AwsDynamoDbLocalTestUtils.java">AwsDynamoDbLocalTestUtils</a> and call <a href="https://github.com/redskap/aws-dynamodb-java-example-local-testing/blob/master/src/test/java/io/redskap/java/aws/dynamodb/example/local/testing/AwsDynamoDbLocalTestUtils.java#L30">AwsDynamoDbLocalTestUtils#initSqLite()</a> during setup function of JUnit Test class</p>
+</div>
+<div class="sect2">
+<h3 id="dynamodb_domain_pojo">DynamoDb Domain POJO</h3>
+<div class="paragraph">
+<p>This class is POJO representation of Dynamo DB schema, I have used  <a href="https://projectlombok.org/">lombok</a> to avoid boiler plating of Getter and Setter methods, @DynamoDbBean represents dynamo db structure and @DynamoDbPartitionKey represents primary key id</p>
+</div>
+<div id="DynamoDB" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="Java">@Data
+@DynamoDbBean
+public class Student {
+    private String studentId;
+    private String studentName;
+    private String department;
+    @DynamoDbPartitionKey
+    @DynamoDbAttribute("studentId")
+    public String getStudentId() {
+        return studentId;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dynamodb_service_implementation">DynamoDb Service Implementation</h3>
+<div class="paragraph">
+<p>This class has full DAO implementation</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>CreateTable</p>
+</li>
+<li>
+<p>Insert/Update Item based on partitions key</p>
+</li>
+<li>
+<p>Get Item by Id</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/fazeem84/DynamoDbLocal/blob/main/src/main/java/com/dynamo/local/service/DynamoDBService.java">DynamoDBService.java</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting_up_junit_test_class">Setting Up JUnit Test class</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During the startup JUnit will spin up a local dynamo DB instance and following code shows how to establish DynamoClient connectivity to local instance</p>
+</div>
+<div id="DynamoDB" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="Java">private static final String TABLE_NAME = "Student";
+private static  DynamoDBProxyServer server;
+private static final String port = "8000";
+private static final String uri = "http://localhost:"+port;
+
+ @BeforeEach
+    public void setUpTest() throws Exception {
+        'AwsDynamoDbLocalTestUtils copied from the github repo as explained earlier'
+        AwsDynamoDbLocalTestUtils.initSqLite();
+        'This line will spin up local instance on 8080 port'
+        server = ServerRunner.createServerFromCommandLineArgs(
+                new String[]{"-inMemory", "-port", port});
+        server.start();
+        client=DynamoDbClient.builder()
+                .endpointOverride(URI.create(uri))
+                .region(Region.AF_SOUTH_1)'Any region should work '
+                .credentialsProvider(StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create("fakeMyKeyId","fakeSecretAccessKey")))
+                .build();
+
+    }</code></pre>
+</div>
+</div>
+</div>
+</div></p>
             <a href="blog/2022/first-blog.html"><h1>Building your personal blog with JBake and GitHub Pages</h1></a>
         <p>Sat Jan 01 00:00:00 UTC 2022</p>
         <p><div id="preamble">
