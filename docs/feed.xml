@@ -6,9 +6,113 @@
         <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
         <description>JBake Bootstrap Template</description>
         <language>en-gb</language>
-        <pubDate>Sun Oct 16 22:05:40 UTC 2022</pubDate>
-        <lastBuildDate>Sun Oct 16 22:05:40 UTC 2022</lastBuildDate>
+        <pubDate>Sun Nov 13 10:42:33 UTC 2022</pubDate>
+        <lastBuildDate>Sun Nov 13 10:42:33 UTC 2022</lastBuildDate>
 
+                <item>
+            <title>Tricks to Increase your productivity</title>
+            <link>http://jbake.org/blog/2022/javatricks.html</link>
+            <pubDate>Sun Nov 13 00:00:00 UTC 2022</pubDate>
+            <guid isPermaLink="false">blog/2022/javatricks.html</guid>
+            <description>
+                &lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Is anybody faced a scenario where they found it&amp;#8217;s efficient to automate the code generation so that eliminate monotonous work,
+here are a few scenarios I faced and how few tricks helped me to increase the productivity&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Creating Database domain class from Schema&lt;/strong&gt;, most of the time the database columns will be in snake case (eg: COLUMN_NAME), it will be error prone to create domain object of Table which have more than 20 columns manually. There are tools available in Hibernate and other ORM frame work to do it, but if don&amp;#8217;t want to use it  please use the following snippet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;public static void printSnakeListToJavaVar(List&amp;lt;String&amp;gt; snakeList) {
+for (String columnName : snakeList) {
+columnName = columnName.trim();
+System.out.println(&quot;@Column(name=\&quot;&quot; + columnName + &quot;\&quot;)&quot;);
+System.out.println(&quot;String &quot; + snakeToJavaVar(columnName.toLowerCase()) + &quot;;&quot;);
+}
+
+    }
+ public static String snakeToJavaVar(String str) {
+        // Capitalize first letter of string
+        str = str.substring(0, 1).toLowerCase()
+                + str.substring(1);
+
+        // Run a loop till string
+        return capitalizeFirstCharAfterDelimiter(str, &quot;_&quot;);
+}
+private static String capitalizeFirstCharAfterDelimiter(String str, String deLimiter) {
+        // string contains delimiter
+        while (str.matches(&quot;.*&quot; + deLimiter + &quot;.*&quot;)) {
+
+            str = str.replaceFirst(
+                    deLimiter + &quot;[a-z]&quot;,
+                    String.valueOf(
+                            Character.toUpperCase(
+                                    str.charAt(
+                                            str.indexOf(deLimiter) + 1))));
+        }
+
+        return str;
+    }&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot; start=&quot;2&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Schema from Domain object&lt;/strong&gt; like in the first example there might situations a dev will be encountering to create a schema from domain object, the following code snippet will be helpful in this scenario&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;public static String camelToSnake(String str) {
+        String result = &quot;&quot;;
+        char c = str.charAt(0);
+        result = result + Character.toLowerCase(c);
+        for (int i = 1; i &amp;lt; str.length(); i++) {
+
+            char ch = str.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                result = result + &#39;_&#39;;
+                result
+                        = result
+                        + Character.toLowerCase(ch);
+            }else {
+                result = result + ch;
+            }
+        }
+
+        return result;
+    }&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot; start=&quot;3&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Delimited String to Upper Camel Case&lt;/strong&gt;  this is used when situation when dev has to Transform a String  or set of String&amp;#8217;s which are Saved in ERP,DB etc. to a String presentable in UI&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;CaseConvertor.stringToUpperCamelIncludeDelimiter(&quot;12 DAYS&quot;,&quot; &quot;)
+public static String stringToUpperCamelIncludeDelimiter(String str, String delimiter) {
+        return Arrays.stream(str.toLowerCase().split(delimiter))
+                .map(CaseConvertor::capitalize)
+                .collect(Collectors.joining(delimiter));
+    }
+
+    public static String capitalize(String str) {
+        if (str == null || str.length() &amp;lt;= 1) return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;            </description>
+        </item>
                 <item>
             <title>Enhanced Dynamo DB  and Integration Test Using Dynamo Local</title>
             <link>http://jbake.org/blog/2022/dynamo-local.html</link>
