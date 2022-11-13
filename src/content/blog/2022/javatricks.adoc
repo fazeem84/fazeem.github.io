@@ -1,0 +1,90 @@
+= Tricks to Increase your productivity
+Fazeem Mohammed
+2022-11-13
+:jbake-type: post
+:jbake-status: published
+:jbake-tags: blog, asciidoc
+:idprefix:
+Is anybody faced a scenario where they found it's efficient to automate the code generation so that eliminate monotonous work,
+here are a few scenarios I faced and how few tricks helped me to increase the productivity
+
+. **Creating Database domain class from Schema**, most of the time the database columns will be in snake case (eg: COLUMN_NAME), it will be error prone to create domain object of Table which have more than 20 columns manually. There are tools available in Hibernate and other ORM frame work to do it, but if don't want to use it  please use the following snippet.
+[source]
+----
+public static void printSnakeListToJavaVar(List<String> snakeList) {
+for (String columnName : snakeList) {
+columnName = columnName.trim();
+System.out.println("@Column(name=\"" + columnName + "\")");
+System.out.println("String " + snakeToJavaVar(columnName.toLowerCase()) + ";");
+}
+
+    }
+ public static String snakeToJavaVar(String str) {
+        // Capitalize first letter of string
+        str = str.substring(0, 1).toLowerCase()
+                + str.substring(1);
+
+        // Run a loop till string
+        return capitalizeFirstCharAfterDelimiter(str, "_");
+}
+private static String capitalizeFirstCharAfterDelimiter(String str, String deLimiter) {
+        // string contains delimiter
+        while (str.matches(".*" + deLimiter + ".*")) {
+
+            str = str.replaceFirst(
+                    deLimiter + "[a-z]",
+                    String.valueOf(
+                            Character.toUpperCase(
+                                    str.charAt(
+                                            str.indexOf(deLimiter) + 1))));
+        }
+
+        return str;
+    }
+----
+[start=2]
+. **Schema from Domain object** like in the first example there might situations a dev will be encountering to create a schema from domain object, the following code snippet will be helpful in this scenario
+
+[source]
+----
+public static String camelToSnake(String str) {
+        String result = "";
+        char c = str.charAt(0);
+        result = result + Character.toLowerCase(c);
+        for (int i = 1; i < str.length(); i++) {
+
+            char ch = str.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                result = result + '_';
+                result
+                        = result
+                        + Character.toLowerCase(ch);
+            }else {
+                result = result + ch;
+            }
+        }
+
+        return result;
+    }
+----
+
+[start=3]
+. **Delimited String to Upper Camel Case**  this is used when situation when dev has to Transform a String  or set of String's which are Saved in ERP,DB etc. to a String presentable in UI
+
+[source]
+----
+CaseConvertor.stringToUpperCamelIncludeDelimiter("12 DAYS"," ")
+public static String stringToUpperCamelIncludeDelimiter(String str, String delimiter) {
+        return Arrays.stream(str.toLowerCase().split(delimiter))
+                .map(CaseConvertor::capitalize)
+                .collect(Collectors.joining(delimiter));
+    }
+
+    public static String capitalize(String str) {
+        if (str == null || str.length() <= 1) return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+----
+
+
+
